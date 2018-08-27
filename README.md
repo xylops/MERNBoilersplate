@@ -4,7 +4,7 @@ Frontend
 * React
 * Redux
 * Redux-logger
-* Connedt-react-router
+* Connected-react-router
 * Webpack
 * Bootstrap
 * Jquery
