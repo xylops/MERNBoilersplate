@@ -35,6 +35,10 @@ module.exports = {
 		contentBase: './public',
 		compress: true,
 		port: 9000,
-		hot: true
+		hot: true,
+		// historyApiFallback: true,
+		proxy: {
+			'/': 'http://localhost:3000'
+		}
 	}
 };

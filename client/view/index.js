@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import * as actions from '../redux/actions'
 
 class MainPage extends Component {
     changeLang(){
         let { dispatch } = this.props
-        dispatch(actions.changeLang())
+        // dispatch(actions.changeLang())
+        dispatch(push('/login'))
     }
     render(){
         let { currentLang } = this.props

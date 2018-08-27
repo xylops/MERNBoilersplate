@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
@@ -30,12 +29,6 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-	],
-	devServer: {
-		contentBase: './public',
-		compress: true,
-		port: 9000,
-		hot: true
-	}
+		new webpack.HotModuleReplacementPlugin()
+	]
 };
