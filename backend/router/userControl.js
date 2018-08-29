@@ -53,12 +53,16 @@ router.post('/login', async(req, res) => {
         await UserModel.findOneAndUpdate({ _id: user._id }, { $set: { token } }, { upsert: true });
         return res
                 .status(200)
-                .cookie('token',token, { maxAge: 10 * 60 * 60 * 1000 , httpOnly: true })
+                .cookie('token',token, { maxAge: 60 * 60 * 1000})
                 .send('success');
     } catch(err) {
         logger.error(err)
         return res.status(500).json({ success: false, errMsg: 'Server error' });
     }
+})
+
+router.post('/logout', async(req, res) => {
+    res.clearCookie('token').json({ success: true})
 })
 
 module.exports = router

@@ -3,11 +3,8 @@ MERN Boilersplate with basic auth
 Frontend
 * React
 * Redux
-* Redux-logger
-* Connected-react-router
+* React-router
 * Webpack
-* Bootstrap
-* Jquery
 
 Backend
 * Nodejs
@@ -15,9 +12,11 @@ Backend
 * Express
 * JsonWebToken
 * Bcryptjs
-* Winston
 
-Redis in the package.json could be remove but I just include it for further usage
+Further dependencies info look at package.json
+
+Username: user
+Password: 1234
 
 How to use
 * "npm run dev" for development (localhost:9000)

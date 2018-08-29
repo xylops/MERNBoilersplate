@@ -2,27 +2,31 @@ import React, { Component } from 'react';
 //Redux dependencies
 import { createBrowserHistory } from 'history'
 import { applyMiddleware, compose, createStore } from 'redux'
-import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
-import { Route, Switch } from 'react-router'
+import { Route, Switch, Redirect } from 'react-router'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import rootReducer from './redux/reducer'
 
+//Component
+import PublicLayout from './component/publicLayout'
 //View
 import MainPage from './view' 
 import LoginScreen from './view/loginScreen'
+import Dashboard from './view/dashboard'
 
-const history = createBrowserHistory()
+const history = createBrowserHistory({
+    basname: '',
+    hashType: 'slash'
+  })
 
 let middlewares = []
 middlewares.push(thunk);
 middlewares.push(logger);
-middlewares.push(routerMiddleware(history))
 
 let initialState = {}
 let store = createStore(
-    connectRouter(history)(rootReducer), 
+    rootReducer, 
     initialState, 
     compose(
         applyMiddleware(...middlewares),
@@ -34,14 +38,25 @@ class App extends Component {
     render(){
         return (
             <Provider store={store}>
-                <ConnectedRouter history={history}>
+                <PublicLayout>
                     <Switch>
-                        <Route exact path="/" component={()=><LoginScreen/> } />
+                        <Route exact path="/" render={() => {
+                            return <Redirect to="/login"/>
+                        }}/>
+                        <Route path="/login" render={()=><LoginScreen/> } />
+                        <Route path="/dashboard" render={()=><Dashboard/> } />
+                        <Route component={NoMatch}/>
                     </Switch>
-                </ConnectedRouter>
+                </PublicLayout>
             </Provider>
         )
     }
 }
+
+const NoMatch = ({ location }) => (
+    <div>
+        <h3><code>404</code></h3>
+    </div>
+)
 
 export default App;
